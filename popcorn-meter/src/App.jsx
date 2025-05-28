@@ -2,10 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import StarRating from "./StarRating";
 import { useMovies } from "./useMovies";
-
-const API_KEY = "4d89307f";
 const App = () => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("int");
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [watched, setWatched] = useState(() => {
     const saved = localStorage.getItem("watched");
@@ -198,7 +196,7 @@ const MovieDetails = ({ movieId, onClose, onHandleAdd, watched }) => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://www.omdbapi.com/?apikey=${API_KEY}&i=${movieId}`, 
+          `https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&i=${movieId}`, 
           { signal }
         );
         const data = await response.json();
